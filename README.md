@@ -204,7 +204,41 @@ contract MiToken is ERC721URIStorage {
     }
 }
 ```
+El código proporcionado define un contrato inteligente `MiToken` que sigue el estándar ERC-721 para tokens no fungibles (NFT) en Ethereum, utilizando Solidity versión ^0.8.0. Este contrato se extiende del contrato `ERC721URIStorage` provisto por OpenZeppelin, lo que permite a cada token tener metadatos asociados accesibles a través de un URI. Aquí tienes una explicación de sus componentes principales:
 
+### SPDX-License-Identifier: MIT
+
+Esta línea indica que el contrato se distribuye bajo la Licencia MIT, una licencia de software libre permisiva.
+
+### Importaciones
+
+- `ERC721URIStorage.sol`: Un contrato de OpenZeppelin que implementa funcionalidades ERC-721, permitiendo además asociar una URL de metadatos con cada token.
+- `Counters.sol`: Provee una manera segura de incrementar y decrementar contadores. Aquí se usa para generar identificadores únicos para cada token.
+
+### Contrato `MiToken`
+
+Hereda de `ERC721URIStorage`, indicando que es un token NFT con metadatos URI almacenables.
+
+#### Variables y Estructuras
+
+- `_tokenIdCounter`: Un contador que se utiliza para asignar un ID único a cada NFT acuñado.
+- `Exhibicion`: Una estructura que almacena información sobre la exhibición de la obra, incluyendo el inicio, duración y una galería virtual representada por una cadena de texto.
+
+#### Constructor
+
+Inicializa el contrato con un nombre (`MiArteDigital`) y un símbolo (`MAD`) para el token.
+
+#### Funciones
+
+- `acunar`: Permite acuñar un nuevo NFT, asignándole un ID único, transfiriéndolo a un destinatario específico y asociándole una URL de metadatos.
+- `exhibirObra`: Asocia una obra (representada por un `tokenId`) con una exhibición específica, registrando su tiempo de inicio, duración y la galería virtual.
+- `transferirPropiedad`: Permite transferir la propiedad de un NFT a un nuevo propietario, manteniendo una verificación para asegurar que solo el actual propietario pueda realizar esta acción.
+
+### Seguridad y Gestión
+
+El contrato hace uso de `require` para asegurar que solo el propietario de un token pueda exhibir la obra o transferir la propiedad, protegiendo contra usos no autorizados.
+
+En resumen, `MiToken` es un contrato ERC-721 personalizado que no solo permite la acuñación y transferencia de NFTs sino que también introduce la noción de exhibiciones para obras de arte digitales, asociando metadatos adicionales y gestión de propiedad dentro de un contexto específico de galería virtual.
 
 ## Deploy ERC-721
 - **URL TX:** https://sepolia.etherscan.io/tx/0x2d335a36a9821d84475e467c95c6ef76a7100ff699b77026968aa2562fcc35ec
