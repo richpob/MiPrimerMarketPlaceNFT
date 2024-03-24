@@ -71,7 +71,7 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENS
 
 
 **Traspaso a cuente 0x18D6d8162f22D485320CAeF164d45F59C15f32cB**
-<img src="![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/66cb28f7-ebcf-4246-b712-dc94e2c6213a)" width="3000">
+<img src=![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/66cb28f7-ebcf-4246-b712-dc94e2c6213a) width="3000">
 
 
 
