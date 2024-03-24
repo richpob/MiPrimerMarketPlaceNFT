@@ -6,66 +6,67 @@ import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
 
-
 contract NFTMarketplace is ERC721URIStorage {
     using Counters for Counters.Counter;
-    Counters.Counter private _tokenIdCounter;
+    Counters.Counter private _itemIds;
     IERC20 private paymentToken;
 
-    // Estructura para manejar la venta de NFTs
-    struct Sale {
-        address seller;
+    struct MarketItem {
+        uint itemId;
+        uint256 tokenId;
+        address payable seller;
         uint256 price;
-        bool isForSale;
+        bool sold;
     }
 
-    // Mapping de tokenId a su venta
-    mapping(uint256 => Sale) public sales;
+    mapping(uint256 => MarketItem) private idToMarketItem;
 
-    event NFTListed(uint256 indexed tokenId, address seller, uint256 price);
-    event NFTRemoved(uint256 indexed tokenId);
-    event NFTSold(uint256 indexed tokenId, address buyer, uint256 price);
+    event MarketItemCreated (
+        uint indexed itemId,
+        uint256 indexed tokenId,
+        address seller,
+        uint256 price,
+        bool sold
+    );
 
     constructor(address _paymentToken) ERC721("MiArteDigital", "MAD") {
         paymentToken = IERC20(_paymentToken);
     }
 
-    // Listar un NFT para la venta
-    function listNFT(uint256 tokenId, uint256 price) public {
-        require(ownerOf(tokenId) == msg.sender, "Solo el propietario puede listar el NFT para la venta");
-        require(price > 0, "El precio debe ser mayor que 0");
+    function createMarketItem(uint256 tokenId, uint256 price) public payable {
+        require(price > 0, "Price must be at least 1 wei");
 
-        sales[tokenId] = Sale(msg.sender, price, true);
+        _itemIds.increment();
+        uint256 itemId = _itemIds.current();
 
-        emit NFTListed(tokenId, msg.sender, price);
+        idToMarketItem[itemId] = MarketItem(
+            itemId,
+            tokenId,
+            payable(msg.sender),
+            price,
+            false
+        );
+
+        _transfer(msg.sender, address(this), tokenId);
+        emit MarketItemCreated(itemId, tokenId, msg.sender, price, false);
     }
 
-    // Comprar un NFT
-    function buyNFT(uint256 tokenId) public {
-        Sale memory sale = sales[tokenId];
-        require(sale.isForSale, "Este NFT no esta a la venta");
+    function createSale(uint256 itemId) public payable {
+        uint price = idToMarketItem[itemId].price;
+        uint tokenId = idToMarketItem[itemId].tokenId;
+        require(!idToMarketItem[itemId].sold, "This sale is already finalized");
+        require(paymentToken.transferFrom(msg.sender, idToMarketItem[itemId].seller, price), "Failed to transfer payment");
 
-        // Transferir tokens ERC-20 como pago
-        require(paymentToken.transferFrom(msg.sender, sale.seller, sale.price), "Pago fallido");
-
-        // Transferir la propiedad del NFT
-        _transfer(sale.seller, msg.sender, tokenId);
-
-        // Limpiar el estado de la venta
-        sales[tokenId].isForSale = false;
-
-        emit NFTSold(tokenId, msg.sender, sale.price);
+        idToMarketItem[itemId].sold = true;
+        _transfer(address(this), msg.sender, tokenId);
+        emit MarketItemCreated(itemId, tokenId, idToMarketItem[itemId].seller, price, true);
     }
 
-    // Funciones de administración de metadatos ERC-721 y otras funcionalidades
+    // Funciones administrativas
 
-    // Actualizar metadatos del token (administradores)
     function updateTokenMetadata(uint256 tokenId, string memory tokenURI) public  {
         _setTokenURI(tokenId, tokenURI);
     }
 
-    // Funciones adicionales para la gestión por parte de los administradores
-    // Podrían incluir la modificación de la dirección del token de pago, ajustes en la política de comisiones, etc.
-
-    // Heredar y utilizar las funciones del contrato ERC-721 proporcionado para la acuñación, exhibición y transferencia de propiedad con lógica específica del proyecto.
+    // Aquí podrían añadirse más funciones según los requisitos del proyecto, incluyendo la gestión de la comisión, la administración de usuarios, entre otros.
 }

@@ -707,7 +707,7 @@
 	},
 	"settings": {
 		"compilationTarget": {
-			"contracts/MyToken.sol": "NFTMarketplace"
+			"contracts/NFTMarketplace.sol": "NFTMarketplace"
 		},
 		"evmVersion": "cancun",
 		"libraries": {},
@@ -865,12 +865,12 @@
 				"dweb:/ipfs/QmVBEei6aTnvYNZp2CHYVNKyZS4q1KkjANfY39WVXZXVoT"
 			]
 		},
-		"contracts/MyToken.sol": {
-			"keccak256": "0xe5b9b4cdadd666fc1c01b3a2664bb30226f9ac3f29ec85daeecc0c325490799d",
+		"contracts/NFTMarketplace.sol": {
+			"keccak256": "0xc6072ba9fff7d054a829f0d025fec53010cfc84f253a7c59e5eed497261a8471",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://a6586ff79cc54d9a2d77b5572400ceae69cf53b4aca4f311029828e9bfdd949e",
-				"dweb:/ipfs/QmRcQg7G8eb3io97GaAvmNNgzB3HNrwRgbHQBW8a7H1PSv"
+				"bzz-raw://8cbd6d5dc95a95427cb32b75943ab7bd6bf49528b690ba6d6091ca35ba4c9b3d",
+				"dweb:/ipfs/QmdVVHMfooXy6uKzREshtcMFNbmAXFLo2Wskyssikktrzx"
 			]
 		}
 	},

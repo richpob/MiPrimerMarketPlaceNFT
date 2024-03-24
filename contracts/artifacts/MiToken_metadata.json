@@ -223,24 +223,6 @@
 			{
 				"inputs": [
 					{
-						"internalType": "uint256",
-						"name": "tokenId",
-						"type": "uint256"
-					},
-					{
-						"internalType": "string",
-						"name": "tokenURI",
-						"type": "string"
-					}
-				],
-				"name": "actualizarMetadatos",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
-				"inputs": [
-					{
 						"internalType": "address",
 						"name": "destinatario",
 						"type": "address"
@@ -735,14 +717,6 @@
 		"remappings": []
 	},
 	"sources": {
-		"@openzeppelin/contracts/access/Ownable.sol": {
-			"keccak256": "0xff6d0bb2e285473e5311d9d3caacb525ae3538a80758c10649a4d61029b017bb",
-			"license": "MIT",
-			"urls": [
-				"bzz-raw://8ed324d3920bb545059d66ab97d43e43ee85fd3bd52e03e401f020afb0b120f6",
-				"dweb:/ipfs/QmfEckWLmZkDDcoWrkEvMWhms66xwTLff9DDhegYpvHo1a"
-			]
-		},
 		"@openzeppelin/contracts/interfaces/IERC165.sol": {
 			"keccak256": "0xde7e9fd9aee8d4f40772f96bb3b58836cbc6dfc0227014a061947f8821ea9724",
 			"license": "MIT",
@@ -872,11 +846,11 @@
 			]
 		},
 		"contracts/MiTokenNFT.sol": {
-			"keccak256": "0x3a4074b289605dba2e9f0e5d438260f1428e0b6cac752fab77b6cea77637ec14",
+			"keccak256": "0xc0766486f4b79b1016808ff7cdd8247e5db5262f1eb877c09a85dfc10a2ba6ca",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://c61551d59cb613592cf82ca683279c9e1d661c175172b93e74fee72ff46cf306",
-				"dweb:/ipfs/QmanfQdDrdtUXfWC4Kd4HtsB1evAsYFxJkoatshGhfP48B"
+				"bzz-raw://5bece960194024b3ec03e05e388cac03dece09f14057cb74af7cd9471befb11e",
+				"dweb:/ipfs/QmVJZHzwxDbSeA9Yiwt3ziTgGvmCLMfw5c56Yhu42xFjJQ"
 			]
 		}
 	},

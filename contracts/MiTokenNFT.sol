@@ -3,9 +3,8 @@ pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
 import "@openzeppelin/contracts/utils/Counters.sol";
-import "@openzeppelin/contracts/access/Ownable.sol"; // Importamos Ownable
 
-contract MiToken is ERC721URIStorage { // Añadimos Ownable a la herencia
+contract MiToken is ERC721URIStorage {
     using Counters for Counters.Counter;
     Counters.Counter private _tokenIdCounter;
 
@@ -41,10 +40,5 @@ contract MiToken is ERC721URIStorage { // Añadimos Ownable a la herencia
         // Asumimos que transferirPropiedad es similar a permitir a otro usuario administrar el token sin transferir la propiedad completa
         // Esta función necesita una lógica de negocio más detallada dependiendo del caso de uso específico
         approve(nuevoPropietario, tokenId);
-    }
-    // Añadimos una función para actualizar los metadatos de un token específico
-    function actualizarMetadatos(uint256 tokenId, string memory tokenURI) public  {
-        //require(_exists(tokenId), "ERC721URIStorage: URI set of nonexistent token"); 
-        _setTokenURI(tokenId, tokenURI);
     }
 }

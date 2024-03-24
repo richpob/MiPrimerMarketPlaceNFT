@@ -108,28 +108,6 @@
 				"type": "error"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "owner",
-						"type": "address"
-					}
-				],
-				"name": "OwnableInvalidOwner",
-				"type": "error"
-			},
-			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "account",
-						"type": "address"
-					}
-				],
-				"name": "OwnableUnauthorizedAccount",
-				"type": "error"
-			},
-			{
 				"anonymous": false,
 				"inputs": [
 					{
@@ -152,25 +130,6 @@
 					}
 				],
 				"name": "Approval",
-				"type": "event"
-			},
-			{
-				"anonymous": false,
-				"inputs": [
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "previousOwner",
-						"type": "address"
-					},
-					{
-						"indexed": true,
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "OwnershipTransferred",
 				"type": "event"
 			},
 			{
@@ -305,21 +264,27 @@
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "owner",
-				"outputs": [
+				"inputs": [
 					{
-						"internalType": "address",
-						"name": "",
-						"type": "address"
+						"internalType": "uint256",
+						"name": "_newRate",
+						"type": "uint256"
 					}
 				],
-				"stateMutability": "view",
+				"name": "setCommissionRate",
+				"outputs": [],
+				"stateMutability": "nonpayable",
 				"type": "function"
 			},
 			{
-				"inputs": [],
-				"name": "renounceOwnership",
+				"inputs": [
+					{
+						"internalType": "address",
+						"name": "_newTreasuryAddress",
+						"type": "address"
+					}
+				],
+				"name": "setTreasuryAddress",
 				"outputs": [],
 				"stateMutability": "nonpayable",
 				"type": "function"
@@ -404,19 +369,6 @@
 				"type": "function"
 			},
 			{
-				"inputs": [
-					{
-						"internalType": "address",
-						"name": "newOwner",
-						"type": "address"
-					}
-				],
-				"name": "transferOwnership",
-				"outputs": [],
-				"stateMutability": "nonpayable",
-				"type": "function"
-			},
-			{
 				"inputs": [],
 				"name": "treasuryAddress",
 				"outputs": [
@@ -483,16 +435,6 @@
 							"spender": "Address that may be allowed to operate on tokens without being their owner."
 						}
 					}
-				],
-				"OwnableInvalidOwner(address)": [
-					{
-						"details": "The owner is not a valid owner account. (eg. `address(0)`)"
-					}
-				],
-				"OwnableUnauthorizedAccount(address)": [
-					{
-						"details": "The caller account is not authorized to perform an operation."
-					}
 				]
 			},
 			"events": {
@@ -520,12 +462,6 @@
 				"name()": {
 					"details": "Returns the name of the token."
 				},
-				"owner()": {
-					"details": "Returns the address of the current owner."
-				},
-				"renounceOwnership()": {
-					"details": "Leaves the contract without owner. It will not be possible to call `onlyOwner` functions. Can only be called by the current owner. NOTE: Renouncing ownership will leave the contract without an owner, thereby disabling any functionality that is only available to the owner."
-				},
 				"symbol()": {
 					"details": "Returns the symbol of the token, usually a shorter version of the name."
 				},
@@ -534,9 +470,6 @@
 				},
 				"transferFrom(address,address,uint256)": {
 					"details": "See {IERC20-transferFrom}. Emits an {Approval} event indicating the updated allowance. This is not required by the EIP. See the note at the beginning of {ERC20}. NOTE: Does not update the allowance if the current allowance is the maximum `uint256`. Requirements: - `from` and `to` cannot be the zero address. - `from` must have a balance of at least `value`. - the caller must have allowance for ``from``'s tokens of at least `value`."
-				},
-				"transferOwnership(address)": {
-					"details": "Transfers ownership of the contract to a new account (`newOwner`). Can only be called by the current owner."
 				}
 			},
 			"version": 1
@@ -612,11 +545,11 @@
 			]
 		},
 		"contracts/MyToken.sol": {
-			"keccak256": "0x835f0c3a844b58c0fe7cab24568ffa872e2851077bde10fca6186337f37b4450",
+			"keccak256": "0xa683ec9fac84bb5027e2b3e5d799991b836987bbcb7d5c92dc8d1f5c391d3f1b",
 			"license": "MIT",
 			"urls": [
-				"bzz-raw://be64ac37b7ea9363eae1444236393f4d716eaf0fe3974c02cbb48c87dffca7f6",
-				"dweb:/ipfs/QmRWB56C3anKDz9gFLymQoUXii6XM766bsaAATcEt9Ci6A"
+				"bzz-raw://a64c2201a2d3f750333bc39e0f575c0d1de5eb02728c9066ff9629c1e4139448",
+				"dweb:/ipfs/QmWzcTaxGZ1ctxs9RZvKVqLMx9nYEpg4RCUE221WkJMCwt"
 			]
 		}
 	},
