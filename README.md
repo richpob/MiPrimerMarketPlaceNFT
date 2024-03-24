@@ -67,8 +67,7 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENS
 ## Imagenes del despligue
 ### Saldos de cuentas
 **Cuenta original 0x9a9DeE7E3E68175549ca5815671cb3717754D29F**
-![image(https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/022fa1c1-ae34-4c72-a54b-8f1d2ba6a4bc) 
-<img src="![image(https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/022fa1c1-ae34-4c72-a54b-8f1d2ba6a4bc)" alt="Descripción de la imagen" width="300">
+<img src="![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/eaa28c0a-8038-43a2-84e7-a5434519ef4f)" alt="Descripción de la imagen" width="300">
 
 
 **Traspaso a cuente 0x18D6d8162f22D485320CAeF164d45F59C15f32cB**
