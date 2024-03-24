@@ -56,3 +56,19 @@ Desplegar en la Testnet de Sepolia permite probar en un entorno similar al Mainn
 ## Licencia
 
 Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
+
+#Deploy de ERC-20 ERC-721 y MarketPlac2
+## ERC-20
+  - **URL TX: ** https://sepolia.etherscan.io/tx/0x57a5221322b063492764daf24a7dd930fb80b87e252f39cfb029f58b0bcfa48b
+  - **URL ERC-20: ** https://sepolia.etherscan.io/address/0xbe886d3456e8c0113fa79e6a6b7da7c9633ab33b
+  - **Contrato validado: ** https://sepolia.etherscan.io/address/0xbe886d3456e8c0113fa79e6a6b7da7c9633ab33b#readContract
+
+## ERC-721
+  - **URL TX: ** 
+  - **URL ERC-20: ** 
+  - **Contrato validado: ** 
+
+ ## Smart Contract Marketplace
+  - **URL TX** 
+  - **URL ERC-20** 
+  - **Contrato validado: ** 

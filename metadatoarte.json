@@ -1,0 +1,19 @@
+{
+  "name": "Paisaje Nocturno",
+  "description": "Una expresiva obra de arte digital que captura la esencia mística de la naturaleza nocturna.",
+  "image": "https://ipfs.io/ipfs/<hash>/paisaje-nocturno.jpg",
+  "attributes": [
+    {
+      "trait_type": "Artista",
+      "value": "Juan Pérez"
+    },
+    {
+      "trait_type": "Año de Creación",
+      "value": "2024"
+    },
+    {
+      "trait_type": "Dimensiones",
+      "value": "1920x1080 pixels"
+    }
+  ]
+}
