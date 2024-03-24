@@ -72,8 +72,9 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENS
 **Traspaso a cuente 0x18D6d8162f22D485320CAeF164d45F59C15f32cB** 
 ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/9550c5fa-d4da-407f-a341-3e7c0ccdd738)
 
-**Comision por transaccion de Yoppen ERC20**
- - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/39f8cdd3-def3-44b3-95df-5ea5c5163a19)
+**Comisión por transaccion de Yoppen ERC20**
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/e5e9e531-9b4b-4860-af0c-cf5bf4a8a890)
+
 
 
 ## ERC-721
