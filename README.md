@@ -59,7 +59,7 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENS
 
 # Deploy de ERC-20 ERC-721 y MarketPlac2
 ## Codigo fuente ERC-20
-´´´ Solidity
+```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
@@ -97,7 +97,8 @@ contract YoppenTokenModified is ERC20 {
         commissionRate = _newRate;
     }
 }
-´´´
+```
+
 ## ERC-20
 - **URL TX:** https://sepolia.etherscan.io/tx/0x2e9cb92d8c9590be50e18a33069409f9d865653406c43967119c400e4e57a981
 - **Contrato ERC20:** 0x7d5C9ad68228397286A7872bE580998948c50E27
