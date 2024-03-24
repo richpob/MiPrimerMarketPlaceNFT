@@ -57,7 +57,7 @@ Desplegar en la Testnet de Sepolia permite probar en un entorno similar al Mainn
 
 Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
 
-# Deploy de ERC-20 ERC-721 y MarketPlac2
+# Codificación y Deployment de ERC-20 ERC-721 y MarketPlac2
 ## Codigo fuente ERC-20
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -98,8 +98,49 @@ contract YoppenTokenModified is ERC20 {
     }
 }
 ```
+## YoppenTokenModified
 
-## ERC-20
+El contrato inteligente `YoppenTokenModified` se basa en el estándar ERC-20 y está diseñado para implementar un token con funcionalidades adicionales, incluida una comisión en las transferencias y la capacidad de ajustar la dirección del tesoro y la tasa de comisión.
+
+### Características
+
+- **Estándar ERC-20**: Implementa todas las funcionalidades estándar de un token ERC-20.
+- **Comisión en Transferencias**: Aplica una comisión del 1% en todas las transferencias, destinada a una dirección de tesorería.
+- **Ajustes de Propietario**: Permite al propietario actualizar la dirección de tesorería y ajustar la tasa de comisión.
+
+### Constructor
+
+El constructor del contrato toma dos parámetros:
+- `address initialOwner`: La dirección del propietario inicial del token.
+- `address _treasuryAddress`: La dirección de la tesorería a la que se enviarán las comisiones.
+
+Al desplegarse, el contrato acuña `100,000,000` tokens (ajustando por el decimal) para el `initialOwner` y establece la dirección de la tesorería.
+
+### Funciones Principales
+
+#### `transfer`
+
+- Sobre escribe la función de transferencia del ERC-20 estándar.
+- Calcula y deduce una comisión del 1% del monto de transferencia, enviando la comisión a la dirección de la tesorería.
+- Requiere que la suma del monto después de la comisión y la comisión sea igual al monto de transferencia original, asegurando no haya discrepancias en las cantidades transferidas.
+
+#### `setTreasuryAddress`
+
+- Permite al propietario del contrato actualizar la dirección de tesorería.
+
+#### `setCommissionRate`
+
+- Permite al propietario del contrato ajustar la tasa de comisión.
+
+### Uso
+
+Este contrato puede ser utilizado en situaciones donde se requiera aplicar una comisión por transferencia para financiar un proyecto, tesorería, o simplemente redistribuir una parte de las transacciones a una dirección específica. Es flexible en cuanto a la gestión de la dirección de tesorería y la tasa de comisión, permitiendo adaptarse a diferentes necesidades y estrategias.
+
+### Licencia
+
+Este contrato se distribuye bajo la licencia MIT, lo que permite su uso, copia, modificación y distribución libremente para cualquier propósito.
+
+## Deploy ERC-20
 - **URL TX:** https://sepolia.etherscan.io/tx/0x2e9cb92d8c9590be50e18a33069409f9d865653406c43967119c400e4e57a981
 - **Contrato ERC20:** 0x7d5C9ad68228397286A7872bE580998948c50E27
 - **URL ERC-20:** https://sepolia.etherscan.io/address/0x7d5c9ad68228397286a7872be580998948c50e27
