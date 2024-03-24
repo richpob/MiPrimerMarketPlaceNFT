@@ -64,6 +64,14 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENS
 - **URL ERC-20:** https://sepolia.etherscan.io/address/0x7d5c9ad68228397286a7872be580998948c50e27
 - **Contrato validado:** https://sepolia.etherscan.io/address/0x7d5c9ad68228397286a7872be580998948c50e27#code
 
+## Imagenes del despligue
+### Saldos de cuentas
+**Cuenta original 0x9a9DeE7E3E68175549ca5815671cb3717754D29F**
+![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/022fa1c1-ae34-4c72-a54b-8f1d2ba6a4bc)
+**Traspaso a cuente 0x18D6d8162f22D485320CAeF164d45F59C15f32cB**
+![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/66cb28f7-ebcf-4246-b712-dc94e2c6213a)
+
+
 
 ## ERC-721
 - **URL TX:** https://sepolia.etherscan.io/tx/0x2d335a36a9821d84475e467c95c6ef76a7100ff699b77026968aa2562fcc35ec
