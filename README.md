@@ -72,6 +72,9 @@ Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENS
 **Traspaso a cuente 0x18D6d8162f22D485320CAeF164d45F59C15f32cB** 
 ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/9550c5fa-d4da-407f-a341-3e7c0ccdd738)
 
+**Comision por transaccion de Yoppen ERC20**
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/39f8cdd3-def3-44b3-95df-5ea5c5163a19)
+
 
 ## ERC-721
 - **URL TX:** https://sepolia.etherscan.io/tx/0x2d335a36a9821d84475e467c95c6ef76a7100ff699b77026968aa2562fcc35ec
