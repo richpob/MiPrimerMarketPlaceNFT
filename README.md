@@ -165,7 +165,8 @@ Este contrato se distribuye bajo la licencia MIT, lo que permite su uso, copia, 
 - **Contrato validado:** https://sepolia.etherscan.io/address/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a#code
 - **Miprimera obra de arte:**
 - https://sepolia.etherscan.io/token/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a
-- 
+- ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/1aed619a-9dc9-4559-a6ba-2ebb5d84ecb5)
+
 
  ## Smart Contract Marketplace
 - **URL TX:** https://sepolia.etherscan.io/tx/0x5d8b87c61ce495fea83c6de6b198b063b7117f1b0bbdc55e0b7b94ddd730a93e
