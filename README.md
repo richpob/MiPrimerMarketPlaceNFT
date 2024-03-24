@@ -57,20 +57,20 @@ Desplegar en la Testnet de Sepolia permite probar en un entorno similar al Mainn
 
 Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
 
-#Deploy de ERC-20 ERC-721 y MarketPlac2
+# Deploy de ERC-20 ERC-721 y MarketPlac2
 ## ERC-20
- - **URL TX: ** https://sepolia.etherscan.io/tx/0x2e9cb92d8c9590be50e18a33069409f9d865653406c43967119c400e4e57a981
- - **Contrato ERC20: 0x7d5C9ad68228397286A7872bE580998948c50E27
- - **URL ERC-20: ** https://sepolia.etherscan.io/address/0x7d5c9ad68228397286a7872be580998948c50e27
- - **Contrato validado: ** https://sepolia.etherscan.io/address/0x7d5c9ad68228397286a7872be580998948c50e27#code
+- **URL TX:** https://sepolia.etherscan.io/tx/0x2e9cb92d8c9590be50e18a33069409f9d865653406c43967119c400e4e57a981
+- **Contrato ERC20:** 0x7d5C9ad68228397286A7872bE580998948c50E27
+- **URL ERC-20:** https://sepolia.etherscan.io/address/0x7d5c9ad68228397286a7872be580998948c50e27
+- **Contrato validado:** https://sepolia.etherscan.io/address/0x7d5c9ad68228397286a7872be580998948c50e27#code
 
 
 ## ERC-721
-  - **URL TX: ** https://sepolia.etherscan.io/tx/0x2d335a36a9821d84475e467c95c6ef76a7100ff699b77026968aa2562fcc35ec
-  - **URL ERC-721: ** https://sepolia.etherscan.io/address/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a
-  - **Contrato validado: ** https://sepolia.etherscan.io/address/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a#code
+- **URL TX: ** https://sepolia.etherscan.io/tx/0x2d335a36a9821d84475e467c95c6ef76a7100ff699b77026968aa2562fcc35ec
+- **URL ERC-721: ** https://sepolia.etherscan.io/address/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a
+- **Contrato validado: ** https://sepolia.etherscan.io/address/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a#code
 
  ## Smart Contract Marketplace
-  - **URL TX: ** https://sepolia.etherscan.io/tx/0x5d8b87c61ce495fea83c6de6b198b063b7117f1b0bbdc55e0b7b94ddd730a93e
-  - **URL Smart Contract: ** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d
-  - **Contrato validado: ** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d#code
+- **URL TX:** https://sepolia.etherscan.io/tx/0x5d8b87c61ce495fea83c6de6b198b063b7117f1b0bbdc55e0b7b94ddd730a93e
+- **URL Smart Contract:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d
+- **Contrato validado:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d#code
