@@ -57,7 +57,7 @@ Desplegar en la Testnet de Sepolia permite probar en un entorno similar al Mainn
 
 Este proyecto está licenciado bajo la Licencia MIT - consulta el archivo LICENSE para más detalles.
 
-# Codificación y Deployment de ERC-20 ERC-721 y MarketPlac2
+# Codificación y Deployment de ERC-20 ERC-721 y MarketPlace
 ## Codigo fuente ERC-20
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -157,6 +157,7 @@ Este contrato se distribuye bajo la licencia MIT, lo que permite su uso, copia, 
 **Comisión por transaccion de Yoppen ERC20**
  - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/e5e9e531-9b4b-4860-af0c-cf5bf4a8a890)
 
+***
 ## Codigo fuente ERC-721
 ```solidity
 // SPDX-License-Identifier: MIT
@@ -247,7 +248,7 @@ En resumen, `MiToken` es un contrato ERC-721 personalizado que no solo permite l
 - **Miprimera obra de arte:**
 - https://sepolia.etherscan.io/token/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a
 - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/1aed619a-9dc9-4559-a6ba-2ebb5d84ecb5)
-
+***
 # Market Place
 ## Codigo fuente de MarketPlaceNFT
 
