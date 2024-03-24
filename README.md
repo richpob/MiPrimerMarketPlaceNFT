@@ -163,6 +163,9 @@ Este contrato se distribuye bajo la licencia MIT, lo que permite su uso, copia, 
 - **URL TX:** https://sepolia.etherscan.io/tx/0x2d335a36a9821d84475e467c95c6ef76a7100ff699b77026968aa2562fcc35ec
 - **URL ERC-721:** https://sepolia.etherscan.io/address/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a
 - **Contrato validado:** https://sepolia.etherscan.io/address/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a#code
+- **Miprimera obra de arte:**
+- https://sepolia.etherscan.io/token/0xd69ba0d84d284bac2fae12e0a8430f274398dc6a
+- 
 
  ## Smart Contract Marketplace
 - **URL TX:** https://sepolia.etherscan.io/tx/0x5d8b87c61ce495fea83c6de6b198b063b7117f1b0bbdc55e0b7b94ddd730a93e
