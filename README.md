@@ -366,3 +366,12 @@ El contrato incorpora funcionalidades esenciales para un mercado de NFTs, como c
 - **URL TX:** https://sepolia.etherscan.io/tx/0x5d8b87c61ce495fea83c6de6b198b063b7117f1b0bbdc55e0b7b94ddd730a93e
 - **URL Smart Contract:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d
 - **Contrato validado:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d#code
+
+### Uso del MArket Place
+ - **Desde el ERC721 se aprueba el uso por el token del Smartcontract**
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/1e5efb06-5370-4a7f-ad46-ef33ec5ebf24)
+ - **Historial de Tx de ERc721**
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/9c539468-2c22-4306-901f-38814d6f46e7)
+ - 
+
+
