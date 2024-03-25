@@ -372,6 +372,8 @@ El contrato incorpora funcionalidades esenciales para un mercado de NFTs, como c
  - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/1e5efb06-5370-4a7f-ad46-ef33ec5ebf24)
  - **Historial de Tx de ERc721**
  - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/9c539468-2c22-4306-901f-38814d6f46e7)
- - 
+ - **Creación de Item en MarketPlace**
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/f0d6a0ea-4cd9-4636-afbb-4e3baed0a7ff)
+
 
 
