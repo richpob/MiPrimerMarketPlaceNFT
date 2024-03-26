@@ -363,6 +363,20 @@ El código proporcionado es un contrato inteligente para un mercado de NFT (Toke
 El contrato incorpora funcionalidades esenciales para un mercado de NFTs, como crear listados de venta y procesar compras. Utiliza tokens ERC-20 como moneda de cambio, lo que agrega flexibilidad en el manejo de pagos. Las funciones administrativas y el evento implementado facilitan la gestión y seguimiento de los ítems del mercado.
 
 ## Deploy Smart Contract Marketplace
+**Nuevo**
+https://sepolia.etherscan.io/tx/0xc83bb7714f437cef2abba9d3f3a1713affffe4bc0de16ef91dee0a78ce23a027
+https://sepolia.etherscan.io/address/0xd33b089fe5f34ce11b565d43c54e916752019c8e
+https://sepolia.etherscan.io/address/0xd33b089fe5f34ce11b565d43c54e916752019c8e#readContract
+ - NFT Contrato : nftContract = 0xD69BA0d84D284baC2FAe12E0A8430F274398Dc6A address
+ - ERC-20 0x7d5C9ad68228397286A7872bE580998948c50E27 address
+ - **Contrato desplegado y verificado**
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/5718efa5-c3fa-4f56-86c4-603452eaeefd)
+
+
+**Fin Nuevo**
+
+
+
 - **URL TX:** https://sepolia.etherscan.io/tx/0x5d8b87c61ce495fea83c6de6b198b063b7117f1b0bbdc55e0b7b94ddd730a93e
 - **URL Smart Contract:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d
 - **Contrato validado:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d#code
