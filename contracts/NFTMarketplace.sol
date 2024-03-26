@@ -1,72 +1,63 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
+interface IERC20 {
+    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
+}
 
-contract NFTMarketplace is ERC721URIStorage {
-    using Counters for Counters.Counter;
-    Counters.Counter private _itemIds;
-    IERC20 private paymentToken;
+interface IERC721 {
+    function transferFrom(address from, address to, uint256 tokenId) external;
+    function ownerOf(uint256 tokenId) external view returns (address);
+}
+contract NFTMarketplace {
+    address public admin;
+    IERC20 public paymentToken;
+    IERC721 public nftContract;
 
-    struct MarketItem {
-        uint itemId;
-        uint256 tokenId;
-        address payable seller;
+    struct Listing {
         uint256 price;
-        bool sold;
+        address seller;
     }
 
-    mapping(uint256 => MarketItem) private idToMarketItem;
+    mapping(uint256 => Listing) public listings;
 
-    event MarketItemCreated (
-        uint indexed itemId,
-        uint256 indexed tokenId,
-        address seller,
-        uint256 price,
-        bool sold
-    );
+    event NFTListed(uint256 indexed tokenId, address seller, uint256 price);
+    event NFTPurchased(uint256 indexed tokenId, address seller, address buyer, uint256 price);
 
-    constructor(address _paymentToken) ERC721("MiArteDigital", "MAD") {
+    constructor(address _paymentToken, address _nftContract) {
+        admin = msg.sender;
         paymentToken = IERC20(_paymentToken);
+        nftContract = IERC721(_nftContract);
     }
 
-    function createMarketItem(uint256 tokenId, uint256 price) public payable {
-        require(price > 0, "Price must be at least 1 wei");
-
-        _itemIds.increment();
-        uint256 itemId = _itemIds.current();
-
-        idToMarketItem[itemId] = MarketItem(
-            itemId,
-            tokenId,
-            payable(msg.sender),
-            price,
-            false
-        );
-
-        _transfer(msg.sender, address(this), tokenId);
-        emit MarketItemCreated(itemId, tokenId, msg.sender, price, false);
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Not admin");
+        _;
     }
 
-    function createSale(uint256 itemId) public payable {
-        uint price = idToMarketItem[itemId].price;
-        uint tokenId = idToMarketItem[itemId].tokenId;
-        require(!idToMarketItem[itemId].sold, "This sale is already finalized");
-        require(paymentToken.transferFrom(msg.sender, idToMarketItem[itemId].seller, price), "Failed to transfer payment");
+    function listNFT(uint256 tokenId, uint256 price) public {
+        require(nftContract.ownerOf(tokenId) == msg.sender, "Not the owner");
+        require(price > 0, "Price must be greater than zero");
 
-        idToMarketItem[itemId].sold = true;
-        _transfer(address(this), msg.sender, tokenId);
-        emit MarketItemCreated(itemId, tokenId, idToMarketItem[itemId].seller, price, true);
+        listings[tokenId] = Listing(price, msg.sender);
+        emit NFTListed(tokenId, msg.sender, price);
     }
 
-    // Funciones administrativas
+    function buyNFT(uint256 tokenId) public {
+        Listing memory listing = listings[tokenId];
+        require(listing.price > 0, "NFT not for sale");
 
-    function updateTokenMetadata(uint256 tokenId, string memory tokenURI) public  {
-        _setTokenURI(tokenId, tokenURI);
+        bool success = paymentToken.transferFrom(msg.sender, listing.seller, listing.price);
+        require(success, "Payment failed");
+
+        nftContract.transferFrom(listing.seller, msg.sender, tokenId);
+        emit NFTPurchased(tokenId, listing.seller, msg.sender, listing.price);
+
+        delete listings[tokenId];
     }
 
-    // Aquí podrían añadirse más funciones según los requisitos del proyecto, incluyendo la gestión de la comisión, la administración de usuarios, entre otros.
+    function updateAdmin(address newAdmin) public onlyAdmin {
+        require(newAdmin != address(0), "Invalid address");
+        admin = newAdmin;
+    }
 }
