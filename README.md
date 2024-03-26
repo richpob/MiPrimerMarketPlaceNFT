@@ -254,140 +254,130 @@ En resumen, `MiToken` es un contrato ERC-721 personalizado que no solo permite l
 
 ```solidity
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.0;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/token/ERC721/extensions/ERC721URIStorage.sol";
-import "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import "@openzeppelin/contracts/access/Ownable.sol";
-import "@openzeppelin/contracts/utils/Counters.sol";
-
-contract NFTMarketplace is ERC721URIStorage {
-    using Counters for Counters.Counter;
-    Counters.Counter private _itemIds;
-    IERC20 private paymentToken;
-
-    struct MarketItem {
-        uint itemId;
-        uint256 tokenId;
-        address payable seller;
-        uint256 price;
-        bool sold;
-    }
-
-    mapping(uint256 => MarketItem) private idToMarketItem;
-
-    event MarketItemCreated (
-        uint indexed itemId,
-        uint256 indexed tokenId,
-        address seller,
-        uint256 price,
-        bool sold
-    );
-
-    constructor(address _paymentToken) ERC721("MiArteDigital", "MAD") {
-        paymentToken = IERC20(_paymentToken);
-    }
-
-    function createMarketItem(uint256 tokenId, uint256 price) public payable {
-        require(price > 0, "Price must be at least 1 wei");
-
-        _itemIds.increment();
-        uint256 itemId = _itemIds.current();
-
-        idToMarketItem[itemId] = MarketItem(
-            itemId,
-            tokenId,
-            payable(msg.sender),
-            price,
-            false
-        );
-
-        _transfer(msg.sender, address(this), tokenId);
-        emit MarketItemCreated(itemId, tokenId, msg.sender, price, false);
-    }
-
-    function createSale(uint256 itemId) public payable {
-        uint price = idToMarketItem[itemId].price;
-        uint tokenId = idToMarketItem[itemId].tokenId;
-        require(!idToMarketItem[itemId].sold, "This sale is already finalized");
-        require(paymentToken.transferFrom(msg.sender, idToMarketItem[itemId].seller, price), "Failed to transfer payment");
-
-        idToMarketItem[itemId].sold = true;
-        _transfer(address(this), msg.sender, tokenId);
-        emit MarketItemCreated(itemId, tokenId, idToMarketItem[itemId].seller, price, true);
-    }
-
-    // Funciones administrativas
-
-    function updateTokenMetadata(uint256 tokenId, string memory tokenURI) public  {
-        _setTokenURI(tokenId, tokenURI);
-    }
-
-    // Aquí podrían añadirse más funciones según los requisitos del proyecto, incluyendo la gestión de la comisión, la administración de usuarios, entre otros.
+interface IERC20 {
+    function transferFrom(address sender, address recipient, uint256 amount) external returns (bool);
 }
+
+interface IERC721 {
+    function transferFrom(address from, address to, uint256 tokenId) external;
+    function ownerOf(uint256 tokenId) external view returns (address);
+}
+contract NFTMarketplace {
+    address public admin;
+    IERC20 public paymentToken;
+    IERC721 public nftContract;
+
+    struct Listing {
+        uint256 price;
+        address seller;
+    }
+
+    mapping(uint256 => Listing) public listings;
+
+    event NFTListed(uint256 indexed tokenId, address seller, uint256 price);
+    event NFTPurchased(uint256 indexed tokenId, address seller, address buyer, uint256 price);
+
+    constructor(address _paymentToken, address _nftContract) {
+        admin = msg.sender;
+        paymentToken = IERC20(_paymentToken);
+        nftContract = IERC721(_nftContract);
+    }
+
+    modifier onlyAdmin() {
+        require(msg.sender == admin, "Not admin");
+        _;
+    }
+
+    function listNFT(uint256 tokenId, uint256 price) public {
+        require(nftContract.ownerOf(tokenId) == msg.sender, "Not the owner");
+        require(price > 0, "Price must be greater than zero");
+
+        listings[tokenId] = Listing(price, msg.sender);
+        emit NFTListed(tokenId, msg.sender, price);
+    }
+
+    function buyNFT(uint256 tokenId) public {
+        Listing memory listing = listings[tokenId];
+        require(listing.price > 0, "NFT not for sale");
+
+        bool success = paymentToken.transferFrom(msg.sender, listing.seller, listing.price);
+        require(success, "Payment failed");
+
+        nftContract.transferFrom(listing.seller, msg.sender, tokenId);
+        emit NFTPurchased(tokenId, listing.seller, msg.sender, listing.price);
+
+        delete listings[tokenId];
+    }
+
+    function updateAdmin(address newAdmin) public onlyAdmin {
+        require(newAdmin != address(0), "Invalid address");
+        admin = newAdmin;
+    }
+}
+
 ```
-El código proporcionado es un contrato inteligente para un mercado de NFT (Tokens No Fungibles) basado en Ethereum, utilizando Solidity versión ^0.8.0. Se apoya en las librerías de OpenZeppelin, una suite reconocida por su seguridad y robustez para el desarrollo de contratos inteligentes. Aquí tienes un desglose de sus componentes principales y su funcionamiento:
+# NFTMarketplace Smart Contract
 
-### Importaciones
+El contrato inteligente `NFTMarketplace` está diseñado para permitir a los usuarios listar y comprar NFTs, utilizando un token ERC-20 como moneda de pago. Este contrato se basa en Solidity versión ^0.8.20.
 
-- **ERC721URIStorage**: Extiende la funcionalidad ERC-721 básica con almacenamiento de URI, permitiendo asociar metadatos con cada NFT.
-- **IERC20**: Interface del estándar ERC-20, utilizado aquí para manejar transacciones con un token ERC-20 como medio de pago.
-- **Ownable**: Un patrón de propiedad que agrega una variable de estado `owner` y modificadores para restringir el acceso a ciertas funciones.
-- **Counters**: Proporciona un contador seguro para rastrear el número de items o tokens.
+## Características
 
-### Estructura y Variables
+- **Listar NFTs para la venta:** Los usuarios pueden listar NFTs especificando un precio.
+- **Comprar NFTs listados:** Los compradores pueden adquirir NFTs disponibles utilizando tokens ERC-20.
 
-- **MarketItem**: Estructura para representar un ítem del mercado, conteniendo información esencial como ID del ítem, ID del token, dirección del vendedor, precio y si ya ha sido vendido.
-- **_itemIds**: Contador para generar IDs únicos para los ítems del mercado.
-- **paymentToken**: Variable para almacenar la dirección del token ERC-20 usado para pagos.
+## Estructuras y Variables
 
-### Constructor
+- `Listing`: Una estructura que almacena información sobre un NFT listado, incluyendo su precio y el vendedor.
+- `admin`: Dirección del administrador del contrato.
+- `paymentToken`: Contrato ERC-20 utilizado para los pagos.
+- `nftContract`: Contrato ERC-721 que representa los NFTs.
 
-- Establece el token de pago y inicializa el contrato ERC-721 con un nombre y símbolo para los NFTs.
+## Funciones
 
-### Funciones Principales
+- `constructor`: Establece el administrador del contrato, el token de pago y el contrato NFT.
+- `listNFT`: Permite a los propietarios de NFTs listarlos para la venta.
+- `buyNFT`: Permite a los compradores adquirir NFTs listados.
+- `updateAdmin`: Permite al administrador actual actualizar la dirección del administrador.
 
-- **createMarketItem**: Permite a los usuarios crear un nuevo ítem de mercado, especificando el ID del token NFT y su precio. Transfiere el NFT al contrato, indicando que está en venta.
-- **createSale**: Permite a los compradores comprar un ítem del mercado, transfiriendo el precio en tokens ERC-20 al vendedor y el NFT al comprador. Marca el ítem como vendido.
+## Modificadores
 
-### Funciones Administrativas
+- `onlyAdmin`: Restringe el acceso a solo el administrador actual del contrato.
 
-- **updateTokenMetadata**: Permite actualizar el URI de metadatos de un token NFT específico. Esto puede ser usado para modificar la información del NFT después de su creación.
+## Eventos
 
-### Eventos
+- `NFTListed`: Se emite cuando un NFT es listado para la venta.
+- `NFTPurchased`: Se emite cuando un NFT es comprado.
 
-- **MarketItemCreated**: Se emite cada vez que se crea un nuevo ítem de mercado o se finaliza una venta, proporcionando información relevante para su rastreo.
+## Interacción con Contratos Externos
 
-### Notas Adicionales
+El contrato interactúa con interfaces externas `IERC20` e `IERC721` para manejar las transferencias de tokens y la propiedad de NFTs, respectivamente.
 
-El contrato incorpora funcionalidades esenciales para un mercado de NFTs, como crear listados de venta y procesar compras. Utiliza tokens ERC-20 como moneda de cambio, lo que agrega flexibilidad en el manejo de pagos. Las funciones administrativas y el evento implementado facilitan la gestión y seguimiento de los ítems del mercado.
+## Seguridad
+
+Se incluyen verificaciones para asegurar que:
+- Solo el propietario de un NFT puede listarlo.
+- Los NFTs solo se pueden comprar si están listados y a un precio mayor a cero.
+- Los pagos se manejan correctamente antes de transferir la propiedad del NFT.
+
+Este contrato es un ejemplo básico de un mercado de NFT y se puede expandir con características adicionales como comisiones de venta, subastas, y más.
+
 
 ## Deploy Smart Contract Marketplace
-**Nuevo**
-https://sepolia.etherscan.io/tx/0xc83bb7714f437cef2abba9d3f3a1713affffe4bc0de16ef91dee0a78ce23a027
-https://sepolia.etherscan.io/address/0xd33b089fe5f34ce11b565d43c54e916752019c8e
-https://sepolia.etherscan.io/address/0xd33b089fe5f34ce11b565d43c54e916752019c8e#readContract
+
+**TX:** https://sepolia.etherscan.io/tx/0xc83bb7714f437cef2abba9d3f3a1713affffe4bc0de16ef91dee0a78ce23a027
+**Contrato:** https://sepolia.etherscan.io/address/0xd33b089fe5f34ce11b565d43c54e916752019c8e
+**Detalles del contrato:** https://sepolia.etherscan.io/address/0xd33b089fe5f34ce11b565d43c54e916752019c8e#readContract
  - NFT Contrato : nftContract = 0xD69BA0d84D284baC2FAe12E0A8430F274398Dc6A address
  - ERC-20 0x7d5C9ad68228397286A7872bE580998948c50E27 address
  - **Contrato desplegado y verificado**
  - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/5718efa5-c3fa-4f56-86c4-603452eaeefd)
-
-
-**Fin Nuevo**
-
-
-
-- **URL TX:** https://sepolia.etherscan.io/tx/0x5d8b87c61ce495fea83c6de6b198b063b7117f1b0bbdc55e0b7b94ddd730a93e
-- **URL Smart Contract:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d
-- **Contrato validado:** https://sepolia.etherscan.io/address/0xad5bc01b244ffe4404d10ff6772a636e4c295b4d#code
-
-### Uso del MArket Place
- - **Desde el ERC721 se aprueba el uso por el token del Smartcontract**
- - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/1e5efb06-5370-4a7f-ad46-ef33ec5ebf24)
- - **Historial de Tx de ERc721**
- - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/9c539468-2c22-4306-901f-38814d6f46e7)
- - **Creación de Item en MarketPlace**
- - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/f0d6a0ea-4cd9-4636-afbb-4e3baed0a7ff)
-
+ - **TX de lista de NFT en Market Place**
+ - https://sepolia.etherscan.io/tx/0xb34447af3ae7fc00bc685e78692acb3710caf8b3076c864184ebd5472d5e53ff
+ - **Aprobación previa del ERC-721 y Listado en MArket Place**
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/59f99fc2-65ea-4b80-b76b-b1a93ee771ac)
+ - ![image](https://github.com/richpob/MiPrimerMarketPlaceNFT/assets/133718913/3dd1d062-a5a0-4512-a5a5-5ae9f3979731)
+   
 
 
